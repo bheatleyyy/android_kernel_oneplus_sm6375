@@ -22,6 +22,7 @@
 #include "sia8159_regs.h"
 
 #define SIA8159_WRITEABLE_REG_NUM			(10)
+#define reg_num 	(SIA8159_REG_TRIMMING_END - SIA8159_REG_TRIMMING_BEGIN + 1)
 
 static const char sia8159_palyback_defaults[][SIA8159_WRITEABLE_REG_NUM] = {
 	[SIA81XX_CHANNEL_L] = {
@@ -264,8 +265,6 @@ static void sia8159_chip_off(
 static void sia8159_check_trimming(
 	struct regmap *regmap)
 {
-	static const uint32_t reg_num = 
-		SIA8159_REG_TRIMMING_END - SIA8159_REG_TRIMMING_BEGIN + 1;
 	static const char defaults[reg_num] = {0x76, 0x66, 0x70};
 	uint8_t vals[reg_num] = {0};
 	uint8_t crc = 0;

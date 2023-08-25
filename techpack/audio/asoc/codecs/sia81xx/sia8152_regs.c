@@ -294,8 +294,7 @@ static void sia8152_check_trimming(
 	struct regmap *regmap)
 {
 	int i = 0;
-	const uint32_t reg_num = ARRAY_SIZE(trimming_regs);
-	uint8_t vals[reg_num] = {0};
+	uint8_t vals[ARRAY_SIZE(trimming_regs)] = {0};
 	uint8_t crc = 0;
 
 	if (0 == sia8152s_check_chip_id(regmap))
@@ -304,16 +303,16 @@ static void sia8152_check_trimming(
 	/* wait reading trimming data to reg */
 	mdelay(1);
 
-	for (i = 0; i < reg_num; i++) {
+	for (i = 0; i < ARRAY_SIZE(trimming_regs); i++) {
 		if (0 != sia81xx_regmap_read(regmap, 
 			trimming_regs[i].addr, 1, (char *)&vals[i]))
 			return ;
 	}
 
-	crc = vals[reg_num - 1] & 0x0F;
-	vals[reg_num - 1] &= 0xF0;
+	crc = vals[ARRAY_SIZE(trimming_regs) - 1] & 0x0F;
+	vals[ARRAY_SIZE(trimming_regs) - 1] &= 0xF0;
 
-	if (crc != crc4_itu(vals, reg_num)) {
+	if (crc != crc4_itu(vals, ARRAY_SIZE(trimming_regs))) {
 		pr_warn("[ warn][%s] %s: trimming failed !! \r\n", 
 			LOG_FLAG, __func__);
 
@@ -324,7 +323,7 @@ static void sia8152_check_trimming(
 		if (0 != sia81xx_regmap_write(regmap, SIA8152_REG_OPC_HCFG, 1, (char *)vals))
 			return;
 
-		for (i = 0; i < reg_num; i++)
+		for (i = 0; i < ARRAY_SIZE(trimming_regs); i++)
 			sia81xx_regmap_write(regmap, 
 				trimming_regs[i].addr, 1, (char *)&(trimming_regs[i].val));
 	}
