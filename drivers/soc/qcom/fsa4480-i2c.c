@@ -891,6 +891,7 @@ static int fsa4480_probe(struct i2c_client *i2c,
 #ifdef OPLUS_ARCH_EXTENDS
 		if (fsa_priv->use_cclogic_det)
 		{
+			rc = cc_audio_register_notify(&fsa_priv->nb);
 			if (rc < 0) {
 				pr_err("blocking_notifier_chain_register error");
 				goto err_supply;
@@ -1041,7 +1042,14 @@ static int fsa4480_remove(struct i2c_client *i2c)
 		power_supply_unreg_notifier(&fsa_priv->nb);
 		power_supply_put(fsa_priv->usb_psy);
 	} else {
+		#ifdef OPLUS_ARCH_EXTENDS
+		if (fsa_priv->use_cclogic_det)
+			cc_audio_unregister_notify(&fsa_priv->nb);
+		else
+			unregister_ucsi_glink_notifier(&fsa_priv->nb);
+		#else
 		unregister_ucsi_glink_notifier(&fsa_priv->nb);
+		#endif /* OPLUS_ARCH_EXTENDS */
 	}
 	fsa4480_usbc_update_settings(fsa_priv, 0x18, 0x98);
 	cancel_work_sync(&fsa_priv->usbc_analog_work);
