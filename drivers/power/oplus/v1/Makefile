@@ -134,6 +134,7 @@ oplus_chg-$(CONFIG_OPLUS_SM8550_CHARGER) += charger_ic/oplus_battery_sm8550.o vo
 oplus_chg-$(CONFIG_OPLUS_SM6375R_CHARGER) += \
 		voocphy/oplus_voocphy.o \
 		charger_ic/oplus_sy6974b.o \
+		charger_ic/oplus_sgm7220.o \
 		charger_ic/oplus_sy6970.o \
 		charger_ic/oplus_sgm41511.o \
 		charger_ic/oplus_sgm41512.o \
