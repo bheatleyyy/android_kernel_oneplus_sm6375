@@ -77,10 +77,7 @@ static long cam_sensor_subdev_ioctl(struct v4l2_subdev *sd,
 		break;
 	}
 	case VIDIOC_CAM_SENSOR_STATR:
-		rc = cam_sensor_start(s_ctrl, VIDIOC_CAM_SENSOR_STATR);
-        break;
-	case VIDIOC_CAM_SENSOR_STATR_NO_WRITE_IZOOM:
-		rc = cam_sensor_start(s_ctrl, VIDIOC_CAM_SENSOR_STATR_NO_WRITE_IZOOM);
+		rc = cam_sensor_start(s_ctrl);
 		break;
 	case VIDIOC_CAM_SENSOR_STOP:
 		rc = cam_sensor_stop(s_ctrl);

@@ -1821,7 +1821,7 @@ static int __cam_isp_ctx_notify_sof_in_activated_state(
 			}
 
 			last_cdm_done_req = isp_hw_cmd_args.u.last_cdm_done;
-			CAM_DBG(CAM_ISP, "last_cdm_done req: %lld",
+			CAM_DBG(CAM_ISP, "last_cdm_done req: %d",
 				last_cdm_done_req);
 
 			if (last_cdm_done_req >= req->request_id) {

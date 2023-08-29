@@ -26,7 +26,7 @@
 #include "cam_req_mgr_debug.h"
 #include "cam_trace.h"
 
-#define CAM_TFE_HW_CONFIG_TIMEOUT 180
+#define CAM_TFE_HW_CONFIG_TIMEOUT 60
 #define CAM_TFE_HW_CONFIG_WAIT_MAX_TRY  3
 
 #define TZ_SVC_SMMU_PROGRAM 0x15
