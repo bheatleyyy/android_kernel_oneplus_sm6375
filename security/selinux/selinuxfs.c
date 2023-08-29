@@ -2141,6 +2141,10 @@ static int __init init_sel_fs(void)
 		selinux_null.dentry = NULL;
 	}
 
+#ifdef OPLUS_FEATURE_SELINUX_CONTROL_LOG
+	init_denied_proc();
+#endif /* OPLUS_FEATURE_SELINUX_CONTROL_LOG */
+
 	return err;
 }
 
